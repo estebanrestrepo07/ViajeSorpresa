@@ -177,16 +177,23 @@
       }
 
       /* Media Queries */
-      @media (min-width: 768px) {
+      @media (max-width: 768px) {
         section {
-          flex-direction: row;
-          text-align: left;
+          flex-direction: column;
+          text-align: center;
         }
 
         section img {
-          width: 45%;
-          max-width: 500px;
-          margin-bottom: 0;
+          width: 80%;
+          max-width: none;
+        }
+
+        .section-odd {
+          flex-direction: column; /* Imágenes arriba, texto abajo en móviles */
+        }
+
+        .section-even {
+          flex-direction: column; /* Imágenes arriba, texto abajo en móviles */
         }
 
         section .text {
