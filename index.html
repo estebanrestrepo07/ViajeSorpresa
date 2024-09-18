@@ -20,12 +20,8 @@
       }
 
       body {
-        font-family: "Arial", sans-serif;
-        background: linear-gradient(
-          135deg,
-          #00b4db,
-          #ffa17f
-        ); /* De azul turquesa a naranja */
+        font-family: "Pacifico", cursive;
+        background: linear-gradient(135deg, #00b4db, #ffa17f);
         color: #ecf0f1;
         scroll-behavior: smooth;
         overflow-x: hidden;
@@ -36,34 +32,16 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 50px; /* Más margen alrededor de las secciones */
-        margin: 20px 0; /* Separación entre las secciones */
+        padding: 30px;
+        margin: 20px 0;
         position: relative;
-        opacity: 0;
-        transform: translateY(50px);
+        opacity: 0; /* Inicialmente oculto */
+        transform: translateY(50px); /* Desplazado */
         transition: opacity 1s ease-in-out, transform 1s ease-in-out;
       }
 
-      section.active {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      section img {
-        width: 45%;
-        max-width: 600px;
-        border-radius: 10px;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-      }
-
-      section .text {
-        width: 45%;
-        padding: 20px;
-        font-size: 1.5rem;
-        line-height: 1.5;
-      }
-      h2 {
-        font-family: "Lobster", cursive;
+      section:first{
+        display: flex;
       }
 
       .section-odd {
@@ -74,10 +52,38 @@
         flex-direction: row-reverse;
       }
 
+      section.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      section img {
+        width: 100%;
+        max-width: 400px; /* Ajustado para pantallas pequeñas */
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        margin-bottom: 20px;
+      }
+
+      section .text {
+        width: 100%;
+        padding: 15px;
+        font-size: 1.2rem; /* Ajustado para pantallas pequeñas */
+        line-height: 1.4;
+        text-align: center;
+      }
+
+      h2 {
+        font-family: "Lobster", cursive;
+        font-size: 1.5rem;
+        /*color: #333;*/
+        margin-bottom: 15px;
+      }
+
       .scroll-message {
         margin-top: 20px;
         font-size: 1.5rem;
-        color: black; /* Amarillo vibrante */
+        color: black; /* negro vibrante */
         font-family: "Pacifico", cursive;
       }
 
@@ -85,11 +91,11 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        /*padding-bottom: 50px;*/
+        padding: 30px;
       }
 
       button {
-        padding: 15px 25px;
+        padding: 12px 20px;
         background-color: #1abc9c;
         color: #fff;
         font-size: 1rem;
@@ -97,11 +103,12 @@
         border-radius: 5px;
         cursor: pointer;
         transition: background 0.3s ease, box-shadow 0.3s ease;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
       }
 
       button:hover {
-        background-color: #0f8e75;
+        background-color: #16a085;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
       }
 
       /* Modal */
@@ -125,11 +132,11 @@
       .modal-content {
         background-color: #fff;
         color: #333;
-        padding: 30px;
+        padding: 20px;
         text-align: center;
         border-radius: 10px;
-        max-width: 600px;
-        width: 80%;
+        max-width: 90%;
+        width: auto;
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         animation: fadeIn 0.3s ease;
       }
@@ -144,12 +151,12 @@
       }
 
       .close-container {
-        margin-top: 20px;
+        margin-top: 15px;
       }
 
       .close {
         color: #333;
-        font-size: 18px;
+        font-size: 16px;
         cursor: pointer;
         font-weight: bold;
       }
@@ -159,20 +166,52 @@
       }
 
       #countdown {
-        font-size: 1.5rem;
-        margin-top: 20px;
+        font-size: 1.2rem;
+        margin-top: 15px;
       }
 
       #countdown img {
         width: 100%;
-        max-width: 400px;
-        margin-top: 20px;
+        max-width: 300px;
+        margin-top: 15px;
+      }
+
+      /* Media Queries */
+      @media (min-width: 768px) {
+        section {
+          flex-direction: row;
+          text-align: left;
+        }
+
+        section img {
+          width: 45%;
+          max-width: 500px;
+          margin-bottom: 0;
+        }
+
+        section .text {
+          width: 45%;
+          padding: 20px;
+          font-size: 1.5rem;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        section img {
+          width: 45%;
+          max-width: 600px;
+        }
+
+        section .text {
+          width: 45%;
+          padding: 30px;
+        }
       }
     </style>
   </head>
   <body>
     <!-- Secciones de las imágenes y texto alternados -->
-    <section id="section1" class="section-odd">
+    <section id="section1" class="section-odd active">
       <img
         src="https://tse3.mm.bing.net/th/id/OIP.uvUu99eAvXMBuk2sDFC_jwHaFj?rs=1&pid=ImgDetMain"
         alt="Imagen 1"
@@ -359,4 +398,3 @@
     </script>
   </body>
 </html>
-
