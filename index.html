@@ -1,213 +1,362 @@
+
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>¡Sorpresa!</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #2c3e50;
-            color: #ecf0f1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            overflow: hidden;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        .container {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: url('https://tse3.mm.bing.net/th/id/OIP.uvUu99eAvXMBuk2sDFC_jwHaFj?rs=1&pid=ImgDetMain')  top left / 33.33% 33.33% no-repeat,
-                        url('https://tse4.mm.bing.net/th/id/OIP.MnN7JIJl7Y3FSai34DdggQHaE8?w=272&h=181&c=7&r=0&o=5&dpr=1.3&pid=1.7') top center / 33.33% 33.33% no-repeat,
-                        url('https://tse2.mm.bing.net/th/id/OIP.euX3FiqoUmWh-BA94pEkwwHaFj?rs=1&pid=ImgDetMain') top right / 33.33% 33.33% no-repeat,
-                        url('https://tse2.mm.bing.net/th/id/OIP.Ks06jWIri9XitteGP7jD-wHaC9?pid=ImgDet&w=474&h=189&rs=1') center left / 33.33% 33.33% no-repeat,
-                        url('https://tse3.mm.bing.net/th/id/OIP._AuEr4_8qqVCxyT5lELCegHaFj?rs=1&pid=ImgDetMain') center center / 33.33% 33.33% no-repeat,
-                        url('https://th.bing.com/th/id/R.899a962ab45e5cb21bc1fc7fa4c95894?rik=sZb7XDQpMwwQeQ&pid=ImgRaw&r=0') center right / 33.33% 33.33% no-repeat,
-                        url('https://tse3.mm.bing.net/th/id/OIP.yRPKPiHR1uLdEwduovAi6wHaEh?rs=1&pid=ImgDetMain') bottom center / 33.33% 33.33% no-repeat;
-            background-blend-mode: multiply;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(
+          135deg,
+          #00b4db,
+          #ffa17f
+        ); /* De azul turquesa a naranja */
+        color: #ecf0f1;
+        scroll-behavior: smooth;
+        overflow-x: hidden;
+      }
 
-        .message {
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 15px;
-        }
+      section {
+        min-height: 50vh;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 50px; /* Más margen alrededor de las secciones */
+        margin: 20px 0; /* Separación entre las secciones */
+        position: relative;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+      }
 
-        .message h1 {
-            margin: 0;
-            font-size: 2em;
-        }
+      section.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
-        button {
-            padding: 15px 30px;
-            border: none;
-            background: #e74c3c;
-            color: white;
-            font-size: 18px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background 0.3s;
-            margin-top: 20px;
-        }
+      section img {
+        width: 45%;
+        max-width: 600px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      }
 
-        button:hover {
-            background: #c0392b;
-        }
+      section .text {
+        width: 45%;
+        padding: 20px;
+        font-size: 1.5rem;
+        line-height: 1.5;
+      }
+      h2 {
+        font-family: "Lobster", cursive;
+      }
 
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-        }
+      .section-odd {
+        flex-direction: row;
+      }
 
-        .modal-content {
-            background-color: #fff;
-            margin: 20% auto;
-            padding: 30px;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 600px;
-            text-align: center;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-        }
+      .section-even {
+        flex-direction: row-reverse;
+      }
 
-        .modal-conten > .h2 {
-            margin-top: 15px;
-        }
+      .scroll-message {
+        margin-top: 20px;
+        font-size: 1.5rem;
+        color: black; /* Amarillo vibrante */
+        font-family: "Pacifico", cursive;
+      }
 
-        .close-container {
-            margin-top: 1rem;
-        }
+      #final-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        /*padding-bottom: 50px;*/
+      }
 
-        .close {
-            color: #333;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+      button {
+        padding: 15px 25px;
+        background-color: #1abc9c;
+        color: #fff;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra sutil */
+      }
 
-        .close:hover,
-        .close:focus {
-            color: #000;
-            text-decoration: none;
-        }
+      button:hover {
+        background-color: #0f8e75;
+      }
 
-        #countdown {
-            font-size: 24px;
-            margin-top: 20px;
-            color: #333;
+      /* Modal */
+      #myModal {
+        display: none;
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 10;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background-color: #fff;
+        color: #333;
+        padding: 30px;
+        text-align: center;
+        border-radius: 10px;
+        max-width: 600px;
+        width: 80%;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
         }
-        #countdown img {
-            width: 100%;
-            max-width: 300px;
-            margin-top: 20px;
+        to {
+          opacity: 1;
         }
-        h2 {
-            background-color: black;
-        }
+      }
+
+      .close-container {
+        margin-top: 20px;
+      }
+
+      .close {
+        color: #333;
+        font-size: 18px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .close:hover {
+        color: #e74c3c;
+      }
+
+      #countdown {
+        font-size: 1.5rem;
+        margin-top: 20px;
+      }
+
+      #countdown img {
+        width: 100%;
+        max-width: 400px;
+        margin-top: 20px;
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div class="message">
-            <h1>¡Algo emocionante está por suceder!</h1>
-            <button id="revealButton">Descubre más</button>
-        </div>
-    </div>
+  </head>
+  <body>
+    <!-- Secciones de las imágenes y texto alternados -->
+    <section id="section1" class="section-odd">
+      <img
+        src="https://tse3.mm.bing.net/th/id/OIP.uvUu99eAvXMBuk2sDFC_jwHaFj?rs=1&pid=ImgDetMain"
+        alt="Imagen 1"
+      />
+      <div class="text">
+        <h1>¡Bienvenido! Algo emocionante está por suceder</h1>
+        <p class="scroll-message">Sigue bajando para descubrir más...</p>
+      </div>
+    </section>
+
+    <section id="section2" class="section-even">
+      <img
+        src="https://tse4.mm.bing.net/th/id/OIP.MnN7JIJl7Y3FSai34DdggQHaE8?w=272&h=181&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+        alt="Imagen 2"
+      />
+      <div class="text">
+        <h2>Prepárate para la aventura</h2>
+        <p class="scroll-message">Sigue bajando para mayor información...</p>
+      </div>
+    </section>
+
+    <section id="section3" class="section-odd">
+      <img
+        src="https://tse2.mm.bing.net/th/id/OIP.euX3FiqoUmWh-BA94pEkwwHaFj?rs=1&pid=ImgDetMain"
+        alt="Imagen 3"
+      />
+      <div class="text">
+        <h2>Pistas sobre la sorpresa...</h2>
+        <p class="scroll-message">¿Tienes curiosidad? Sigue bajando...</p>
+      </div>
+    </section>
+
+    <section id="section4" class="section-even">
+      <img
+        src="https://tse2.mm.bing.net/th/id/OIP.Ks06jWIri9XitteGP7jD-wHaC9?pid=ImgDet&w=474&h=189&rs=1"
+        alt="Imagen 4"
+      />
+      <div class="text">
+        <h2>La emoción está en este super viaje</h2>
+        <p class="scroll-message">Casi llegas, sigue bajando...</p>
+      </div>
+    </section>
+
+    <section id="section5" class="section-odd">
+      <img
+        src="https://tse3.mm.bing.net/th/id/OIP._AuEr4_8qqVCxyT5lELCegHaFj?rs=1&pid=ImgDetMain"
+        alt="Imagen 5"
+      />
+      <div class="text">
+        <h2>La aventura se acerca...</h2>
+        <p class="scroll-message">
+          ¿Listo para el gran final? Sigue bajando...
+        </p>
+      </div>
+    </section>
+
+    <section id="section6" class="section-even">
+      <img
+        src="https://th.bing.com/th/id/R.899a962ab45e5cb21bc1fc7fa4c95894?rik=sZb7XDQpMwwQeQ&pid=ImgRaw&r=0"
+        alt="Imagen 6"
+      />
+      <div class="text">
+        <h2>Estás a punto de descubrirlo...</h2>
+        <p class="scroll-message">Solo un poco más...</p>
+      </div>
+    </section>
+
+    <section id="section7" class="section-odd">
+      <img
+        src="https://tse3.mm.bing.net/th/id/OIP.yRPKPiHR1uLdEwduovAi6wHaEh?rs=1&pid=ImgDetMain"
+        alt="Imagen 7"
+      />
+      <div class="text">
+        <h2>¡Ya casi llegas!</h2>
+        <p class="scroll-message">
+          Haz clic en el botón para la gran revelación...
+        </p>
+      </div>
+    </section>
+
+    <!-- Sección final con botón -->
+    <section id="final-section">
+      <button id="revealButton">Descubre más</button>
+    </section>
 
     <!-- Modal -->
     <div id="myModal" class="modal">
-        <div class="modal-content">
-            <h2 id="title"></h2>
-            <div id="countdown"></div>
-            <div class="close-container">
-                <span class="close">Cerrar</span>
-            </div>
+      <div class="modal-content">
+        <h2 id="title">La aventura está en camino</h2>
+        <div id="countdown"></div>
+        <div class="close-container">
+          <span class="close">Cerrar</span>
         </div>
+      </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('myModal');
-            const btn = document.getElementById('revealButton');
-            const span = document.getElementsByClassName('close')[0];
-            const countdown = document.getElementById('countdown');
-            const title = document.getElementById('title');
-    
-            btn.onclick = function() {
-                modal.style.display = 'block';
-                startCountdown();
-            }
-    
-            span.onclick = function() {
-                modal.style.display = 'none';
-            }
-    
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = 'none';
-                }
-            }
-    
-            function startCountdown() {
-                const targetDate = new Date('2024-09-20T00:00:00-05:00'); // Asegurarse de usar la zona horaria de Colombia
-    
-                function updateCountdown() {
-                    const now = new Date();
-                    const colombiaTime = new Date(now.toLocaleString("en-US", {timeZone: "America/Bogota"}));
-                    const distance = targetDate - colombiaTime;
-    
-                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-                    
-                    title.innerText = "La aventura está en camino"
-                    countdown.innerHTML = `${days} días ${hours} horas ${minutes} minutos ${seconds} segundos`;
-                    if (distance < 0) {
-                        const earlyMorning = new Date('2024-09-20T05:00:00-05:00');
-                        const morning = new Date('2024-09-20T08:00:00-05:00');
+      document.addEventListener("DOMContentLoaded", function () {
+        const sections = document.querySelectorAll("section");
+        const revealButton = document.getElementById("revealButton");
+        const modal = document.getElementById("myModal");
+        const closeButton = document.querySelector(".close");
+        const countdown = document.getElementById("countdown");
+        const title = document.getElementById("title");
 
-                        if (colombiaTime < earlyMorning) {
-                            
-                        } else if (colombiaTime >= earlyMorning && colombiaTime <= morning) {
-                            title.innerText = "La aventura ya esta aquí";
-                            countdown.innerHTML = `El viaje será a la ciudad de Bogotá. 
-                                <br>
+        // Manejar la transición de las secciones al hacer scroll
+        window.addEventListener("scroll", function () {
+          sections.forEach((section) => {
+            const sectionTop = section.getBoundingClientRect().top;
+            const sectionHeight = section.offsetHeight;
+
+            if (
+              sectionTop < window.innerHeight &&
+              sectionTop > -sectionHeight / 2
+            ) {
+              section.classList.add("active");
+            } else {
+              section.classList.remove("active");
+            }
+          });
+        });
+
+        // Mostrar el modal al hacer clic en el botón
+        revealButton.addEventListener("click", function () {
+          modal.style.display = "flex";
+          startCountdown();
+        });
+
+        // Cerrar el modal
+        closeButton.addEventListener("click", function () {
+          modal.style.display = "none";
+        });
+
+        function startCountdown() {
+          const targetDate = new Date("2024-09-20T00:00:00-05:00").getTime();
+
+          function updateCountdown() {
+            const now = new Date().getTime();
+            const colombiaTime = now;
+            const distance = targetDate - colombiaTime;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor(
+              (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+            );
+            const minutes = Math.floor(
+              (distance % (1000 * 60 * 60)) / (1000 * 60)
+            );
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdown.innerHTML = `${days} días ${hours} horas ${minutes} minutos ${seconds} segundos`;
+
+            if (distance < 0) {
+              const earlyMorning = new Date("2024-09-20T05:00:00-05:00");
+              const morning = new Date("2024-09-20T08:00:00-05:00");
+
+              if (colombiaTime < earlyMorning) {
+                // Do something
+              } else if (
+                colombiaTime >= earlyMorning &&
+                colombiaTime <= morning
+              ) {
+                title.innerText = "La aventura ya está aquí";
+                countdown.innerHTML = `
+                                El viaje será a la ciudad de Bogotá.<br>
                                 <img src='https://tse2.mm.bing.net/th/id/OIP.vZT6LDP9e5ZkqHzcFQp5-gAAAA?rs=1&pid=ImgDetMain' alt='Bogotá'>
                                 <img src='https://th.bing.com/th/id/R.92d28c13fab3ffbc3c49bdac769307f2?rik=wxYGQkEl2rRG7A&pid=ImgRaw&r=0' alt='Bogotá'>
                             `;
-                        } else {
-                            title.innerText = "Ahora si, la aventura ya esta aquí XD";
-                            countdown.innerHTML = "Todo era una broma, el verdadero viaje es a la ciudad de Orlando, USA, para ir a Universal Studios. <br><img src='https://th.bing.com/th/id/R.7e048dc4b44127463b61459fc6eeb48b?rik=hYcVGnaJwc%2bEwA&pid=ImgRaw&r=0' alt='Orlando'>";
-                        }
-                        clearInterval(interval);
-                        return;
-                    }
-    
-                }
-                const interval = setInterval(updateCountdown, 10000);
-                updateCountdown(); // Ejecutar una vez inmediatamente
+              } else {
+                title.innerText = "La verdadera aventura ya está aquí";
+                countdown.innerHTML = `
+                                Todo era una broma, el verdadero viaje es a la ciudad de Orlando, USA, para ir a Universal Studios.<br>
+                                <img src='https://th.bing.com/th/id/R.7e048dc4b44127463b61459fc6eeb48b?rik=hYcVGnaJwc%2bEwA&pid=ImgRaw&r=0' alt='Orlando'>
+                            `;
+              }
+              clearInterval(interval);
             }
-        });
+          }
+
+          const interval = setInterval(updateCountdown, 1000);
+          updateCountdown();
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
