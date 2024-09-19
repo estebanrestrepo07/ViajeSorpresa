@@ -112,7 +112,7 @@
       }
 
       /* Modal */
-      #myModal {
+      #myModal, #myModal2{
         display: none;
       }
       .modal {
@@ -300,9 +300,16 @@
     </section>
 
     <!-- Sección final con botón -->
-    <section id="final-section">
+    <div id="final-section">
       <button id="revealButton">Descubre más 😱</button>
-    </section>
+    </div>
+
+    <br><br>
+    <div id="final-section">
+      <h2>Si eres Verónica Aristizabal... esta información te interesa</h2>
+      <img src="https://media.licdn.com/dms/image/v2/D4E03AQEXgouW2BCuxg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1695996487808?e=1732147200&v=beta&t=DofxBNsTADiKLen1u5strcaIhFqqaVSoDsC15iu5bHw" alt="Veronica" style="max-width: 450px;">
+      <button id="trampaButton">Pista pista... 😱</button>
+    </div>
 
     <!-- Modal -->
     <div id="myModal" class="modal">
@@ -315,12 +322,30 @@
       </div>
     </div>
 
+    <!-- Modal -->
+    <div id="myModal2" class="modal">
+      <div class="modal-content">
+        <h2 id="title">Pregunta... para saber que realmente eres tú...</h2>
+        <div id="">¿Tienes un perro llamado Apio facundo?</div>
+        <div class="close-container">
+          <span class="close close1">Si</span>
+          &nbsp; 
+          &nbsp; 
+          <span class="close close2">No</span>
+        </div>
+      </div>
+    </div>
+
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const sections = document.querySelectorAll("section");
         const revealButton = document.getElementById("revealButton");
+        const trampaButton = document.getElementById("trampaButton");
         const modal = document.getElementById("myModal");
+        const modal2 = document.getElementById("myModal2");
         const closeButton = document.querySelector(".close");
+        const closeButton1 = document.querySelector(".close1");
+        const closeButton2 = document.querySelector(".close2");
         const countdown = document.getElementById("countdown");
         const title = document.getElementById("title");
 
@@ -347,10 +372,28 @@
           startCountdown();
         });
 
+        // trampaButton
+        trampaButton.addEventListener("click", function () {
+          modal2.style.display = "flex";
+          startCountdown();
+        });
+
         // Cerrar el modal
         closeButton.addEventListener("click", function () {
           modal.style.display = "none";
+          modal2.style.display = "none";
         });
+
+        // Cerrar el modal
+        closeButton1.addEventListener("click", function () {
+          modal2.style.display = "none";
+          modal.style.display = "flex";
+        });
+         // Cerrar el modal
+         closeButton2.addEventListener("click", function () {
+          window.location.href = "https://www.mundodeportivo.com/urbantecno/hero/2022/12/En-este-post-descubriras-que-son-y-por-que-ocurren-los-pantallazos-azules-en-Windows.jpg?width=1200&aspect_ratio=16:9";
+        });
+
 
         function startCountdown() {
           const targetDate = new Date("2024-09-20T04:59:00-05:00").getTime();
@@ -369,10 +412,10 @@
             );
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            countdown.innerHTML = `${days} días ${hours} horas ${minutes} minutos ${seconds} segundos`;
+            countdown.innerHTML = `${days ? days + ' dias ' : ''}${hours} horas ${minutes} minutos ${seconds} segundos`;
 
             if (distance < 0) {
-              const earlyMorning = new Date("2024-09-20T05:00:00-05:00");
+              const earlyMorning = new Date("2024-09-20T06:00:00-05:00");
               const morning = new Date("2024-09-20T08:00:00-05:00");
 
               if (colombiaTime < earlyMorning) {
@@ -384,14 +427,14 @@
                 title.innerText = "La aventura ya está aquí";
                 countdown.innerHTML = `
                                 El viaje será a la ciudad de Bogotá.<br>
-                                <img src='https://tse2.mm.bing.net/th/id/OIP9e5ZkqHzcFQp5-gAAAA?rs=1&pid=ImgDetMain' alt='Bogotá'>
-                                <img src='https://th.bing.com/th/id/R.92d28c13fab349bdac769307f2?rik=wxYGQkEl2rRG7A&pid=ImgRaw&r=0' alt='Bogotá'>
+                                <img src='https://tse2.mm.bing.net/th/id/OIP.vZT6LDP9e5ZkqHzcFQp5-gAAAA?rs=1&pid=ImgDetMain' alt='Bogotá'>
+                                <img src='https://th.bing.com/th/id/R.92d28c13fab3ffbc3c49bdac769307f2?rik=wxYGQkEl2rRG7A&pid=ImgRaw&r=0' alt='Bogotá'>
                             `;
               } else {
                 title.innerText = "La verdadera aventura ya está aquí";
                 countdown.innerHTML = `
-                                Todo era una broma, el verdadero viaje es a la ciudad de  para ir.<br>
-                                <img src='https://th.bing.com/th/id/R.7e048dc4b4412759fc6eeb48b?rik=hYcVGnaJwc%2bEwA&pid=ImgRaw&r=0' alt='Orlando'>
+                                Todo era una broma, el verdadero viaje es a la ciudad de Orlando, USA, para ir a Universal Studios.<br>
+                                <img src='https://th.bing.com/th/id/R.7e048dc4b44127463b61459fc6eeb48b?rik=hYcVGnaJwc%2bEwA&pid=ImgRaw&r=0' alt='Orlando'>
                             `;
               }
               clearInterval(interval);
